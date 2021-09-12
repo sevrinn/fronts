@@ -23,6 +23,8 @@ class LinkedList {
     newNode.next = this.head;
     //set head to point at the new node
     this.head = newNode;
+    //iterate length up by one;
+    this._length++;
     //return
     return this;
   };
@@ -34,20 +36,55 @@ class LinkedList {
     }
     //set head to the next node;
     this.head = this.head.next;
+    //decrement length of list by one
+    this._length--;
     return this;
   };
 
   showFront = () => {
     return this.head.data;
   };
+
+  contains = (val) => {
+    //declare 
+    let containsVal = null;
+    //loop through linked list
+    for(let i = 0; i < this._length; i++){
+      console.log(this.head.data);
+      //if val of node === val we are looking for
+      if(this.head.data == val) {
+        //set containsVal true
+        containsVal = true;
+        return containsVal;
+      } else { //else
+        //set containsVal to false
+        containsVal = false;
+      }
+      
+      this.head = this.head.next;
+    }
+    
+    return containsVal;
+    
+    
+    
+  }
 }
 
 let myLinkedList = new LinkedList();
 // console.log(myLinkedList);
+// console.log(myLinkedList._length); //0
 myLinkedList.addToFront(10).addToFront(20);
+// console.log(myLinkedList._length); //2
 // console.log(myLinkedList.head.data); //20
 myLinkedList.addToFront(30).addToFront(40);
+// console.log(myLinkedList._length); //4
 // console.log(myLinkedList.head.data); //40
 myLinkedList.removeFromFront();
+// console.log(myLinkedList._length); //3
 // console.log(myLinkedList.head.data); //30
-console.log(myLinkedList.showFront()); //30
+// console.log(myLinkedList.showFront()); //30
+
+//for contains
+console.log(myLinkedList.contains(13)); //false
+console.log(myLinkedList.contains(20)); //true
